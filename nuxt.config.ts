@@ -8,22 +8,30 @@ export default defineNuxtConfig({
         },
     },
 
-    css: [
-        '~/assets/css/tailwind.css'
-    ],
-
-    colorMode: {
-        preference: 'light'
-    },
-
     modules: [
         '@nuxt/ui',
         '@nuxt/image',
         '@pinia/nuxt'
     ],
 
+    colorMode: {
+        preference: 'light'
+    },
+
+    css: [
+        '~/assets/css/tailwind.css'
+    ],
+
     ui: {
         safelistColors: ['error', 'placeholder']
+    },
+
+    runtimeConfig: {
+        jwtSecret: '',
+        turso: {
+            databaseUrl: '',
+            authToken: '',
+        },
     },
 
     devtools: { enabled: true },

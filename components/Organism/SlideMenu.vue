@@ -21,7 +21,7 @@
     </ul>
 
     <template #footer>
-      <AtomsParagraph>Footer</AtomsParagraph>
+      <AtomsSmallParagraph>Footer</AtomsSmallParagraph>
     </template>
   </UCard>
 </template>

@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <p class="text-black dark:text-white text-base leading-6">
+  <p class="text-black dark:text-white text-sm leading-6">
     <slot/>
   </p>
 </template>
