@@ -5,7 +5,7 @@ import type { Answer, Quiz } from "~/types";
 
 export default defineEventHandler(async (event) => {
     const query = getQuery(event);
-    const quizId = parseInt(<string>query.id, 10);
+    const quizId = parseInt(query.id as string, 10);
 
     try {
         // Get quiz

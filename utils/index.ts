@@ -7,14 +7,14 @@ interface Question {
 
 interface QuestionItem {
     label: string;
-    slot: number;
+    id: number;
     answers: any[];
 }
 
 export default function convertQuestionTypeToAccordionItem(questions: Question[]): QuestionItem[] {
     return questions.map(question => ({
         label: question.name,
-        slot: question.id,
-        content: question.answers
+        id: question.id,
+        answers: question.answers
     }));
 }

@@ -1,24 +1,21 @@
 import { db } from '~/server/database';
 import { questions, answers } from '~/server/schema';
-import { and, eq } from "drizzle-orm";
+import { eq } from "drizzle-orm";
 
 export default defineEventHandler(async (event) => {
     const query = getQuery(event)
+    const questionId = parseInt(query.id as string, 10)
 
     try {
         // Delete question
-        console.log(typeof query.id) // TODO: delete, look at todo below
 
         // delete answers linked to this question
         await db.delete(answers)
-            .where(eq(answers.questionId, parseInt(<string>query.id)))
+            .where(eq(answers.questionId, questionId));
 
         // delete question
         await db.delete(questions)
-            .where(
-                // eq(questions.id, query.id), // TODO: try it, and switch in all places
-                eq(questions.id, parseInt(<string>query.id)),
-            );
+            .where(eq(questions.id, questionId));
 
     } catch (error) {
         console.error("Error processing request:", error);

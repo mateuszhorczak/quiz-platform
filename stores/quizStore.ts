@@ -66,7 +66,7 @@ export const useQuizStore = defineStore('quiz', () => {
             },
         }).catch((err) => console.error(err));
 
-        await refreshQuestion()
+        // await refreshQuestion()
     }
 
     const deleteQuiz = async (id: number) => {
@@ -78,7 +78,7 @@ export const useQuizStore = defineStore('quiz', () => {
             },
         }).catch((err) => console.error(err));
 
-        await refreshQuestion()
+        // await refreshQuestion()
     }
 
     // Question section ----
@@ -140,7 +140,7 @@ export const useQuizStore = defineStore('quiz', () => {
             },
         }).catch((err) => console.error(err));
 
-        await refreshQuestion()
+        await refreshCurrentQuiz()
     }
 
     // Answer section ----
@@ -177,21 +177,20 @@ export const useQuizStore = defineStore('quiz', () => {
             },
         }).catch((err) => console.error(err));
 
-        // await refreshAnswer() // TODO: What here?
+        await refreshCurrentQuiz()
     }
 
-    const updateAnswer = async (id: number, name: string, isCorrect: boolean) => {
+    const updateAnswer = async (id: number, isCorrect: boolean) => {
         await $fetch("/api/quiz/answer", {
             // headers: { Authorization: 'Bearer ' + auth.token },
             method: "PATCH",
             body: {
                 id: id,
-                name: name,
                 isCorrect: isCorrect
             },
         }).catch((err) => console.error(err));
 
-        await refreshAnswer()
+        // await refreshAnswer()
     }
 
     const deleteAnswer = async (id: number) => {
@@ -203,7 +202,7 @@ export const useQuizStore = defineStore('quiz', () => {
             },
         }).catch((err) => console.error(err));
 
-        // await refreshAnswer() // TODO: What here?
+        await refreshCurrentQuiz()
     }
 
     return {

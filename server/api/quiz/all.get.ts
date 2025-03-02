@@ -2,8 +2,6 @@ import { db } from "~/server/database";
 import { quizzes } from "~/server/schema";
 
 export default defineEventHandler(async (event) => {
-    const query = getQuery(event)
-    const quizId = parseInt(<string>query.id, 10)
 
     try {
         // Get list of quizzes

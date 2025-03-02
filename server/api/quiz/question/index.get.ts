@@ -4,7 +4,7 @@ import { eq } from "drizzle-orm";
 
 export default defineEventHandler(async (event) => {
     const query = getQuery(event)
-    const questionId = parseInt(<string>query.id, 10)
+    const questionId = parseInt(query.id as string, 10)
 
     try {
         // Get single question

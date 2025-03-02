@@ -9,7 +9,6 @@ export default defineEventHandler(async (event) => {
         // update answer
         await db.update(answers)
             .set({
-                name: body.name,
                 isCorrect: body.isCorrect,
             })
             .where(eq(answers.id, body.id))
