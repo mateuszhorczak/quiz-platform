@@ -102,7 +102,6 @@ export const useQuizStore = defineStore('quiz', () => {
         await $fetch(`/api/question/${ id }`, {
           method: 'DELETE',
         })
-
         await getQuizById(quizId)
       }
       catch (error) {

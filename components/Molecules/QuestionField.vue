@@ -2,10 +2,9 @@
 import type { Answer } from "~/types";
 
 const route = useRoute()
-const quizId = parseInt(route.params.quizId as string, 10)
+const quizId = parseInt(route.params.id as string, 10)
 
 const props = defineProps<{ answers: Answer[], questionId: number }>()
-
 const quizStore = useQuizStore()
 </script>
 
