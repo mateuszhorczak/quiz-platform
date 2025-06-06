@@ -12,6 +12,7 @@ interface QuestionItem {
 }
 
 export default function convertQuestionTypeToAccordionItem(questions: Question[]): QuestionItem[] {
+    if (!questions.length) return []
     return questions.map(question => ({
         label: question.name,
         id: question.id,

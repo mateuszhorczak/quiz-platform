@@ -1,15 +1,17 @@
 import { db } from '~/server/database';
-import { quizzes } from '~/server/schema';
+import { answers } from '~/server/schema';
+import { eq } from "drizzle-orm";
 
 export default defineEventHandler(async (event) => {
-  const body = await readBody(event);
+  const id = getRouterParam(event, "id")
+  const answerId = parseInt(id as string, 10)
 
   try {
-    // Create quiz
-    await db.insert(quizzes).values({
-      name: body.name,
-      description: body.description,
-    })
+    // Delete answer
+    await db.delete(answers)
+      .where(
+        eq(answers.id, answerId),
+      );
 
   }
   catch (error) {

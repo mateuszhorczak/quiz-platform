@@ -1,10 +1,10 @@
 <script setup lang="ts">
 const quizStore = useQuizStore()
-await quizStore.fetchAllQuizzes()
+await quizStore.getAllQuizzes()
 
 const routeToQuiz = async (id: number) => {
   const router = useRouter()
-  await router.push(`/quiz/${id}`)
+  await router.push(`/quiz/${ id }`)
 }
 </script>
 
@@ -13,13 +13,14 @@ const routeToQuiz = async (id: number) => {
     <UIcon name="i-mdi-developer-board" class="w-8 h-8 ml-4" />
     <AtomsSubHeading class="ml-2">Available quizzes</AtomsSubHeading>
   </div>
-  <MoleculeQuiz v-for="quiz in quizStore.allQuizzes"
-                :key="quiz.id"
-                :id="quiz.id"
-                :name="quiz.name"
-                :description="quiz.description"
-                class="my-4 cursor-pointer"
-                @click="routeToQuiz(quiz.id)"
+  <MoleculesQuiz
+      v-for="quiz in quizStore.allQuizzes"
+      :id="quiz.id"
+      :key="quiz.id"
+      :name="quiz.name"
+      :description="quiz.description"
+      class="my-4 cursor-pointer"
+      @click="routeToQuiz(quiz.id)"
 
   />
 </template>

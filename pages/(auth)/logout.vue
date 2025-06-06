@@ -3,5 +3,6 @@
 </script>
 
 <template>
-
+  <!--  TODO-->
+  <p>logout</p>
 </template>

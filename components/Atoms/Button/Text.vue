@@ -3,10 +3,10 @@ const props = defineProps<{ label: string, route: string }>()
 </script>
 
 <template>
-  <UButton :label="props.label"
+  <UButton
+:label="props.label"
            variant="link"
            :to="props.route"
            size="xl"
-           :ui="{ font: 'font-semibold' }"
   />
 </template>

@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <UContainer :ui="{ constrained: '' }">
+  <UContainer>
     <slot />
   </UContainer>
 </template>

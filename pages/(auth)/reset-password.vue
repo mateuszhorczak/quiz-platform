@@ -3,5 +3,6 @@
 </script>
 
 <template>
-
+  <!--  TODO-->
+  <p>reset-password</p>
 </template>
