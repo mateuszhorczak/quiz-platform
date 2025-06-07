@@ -1,10 +1,11 @@
-import type { Quiz, Question, Answer, QuizNames } from "~/types";
+import type { Quiz, Question, Answer, QuizNames, QuizSolve, QuestionWithUserAnswers } from "~/types";
 
 export const useQuizStore = defineStore('quiz', () => {
     const allQuizzes = ref<QuizNames[]>([])
     const currentQuiz = ref<Quiz>()
     const currentQuestion = ref<Question>()
     const currentAnswer = ref<Answer>()
+    const quizToSolve = ref<QuizSolve>()
 
     const createQuiz = async (name: string, description: string) => {
       try {
@@ -203,6 +204,36 @@ export const useQuizStore = defineStore('quiz', () => {
       }
     }
 
+    const getQuizToSolveByQuizId = async (id: number) => {
+      try {
+        const { data } = await useFetch<{ data: QuizSolve }>(`/api/quiz/${ id }/solve`, {
+          method: 'GET'
+        })
+
+        if (data.value) {
+          quizToSolve.value = data.value.data
+        }
+      }
+      catch (error) {
+        console.error(error)
+      }
+    }
+
+    const solveQuiz = async (id: number, userAnswers: QuestionWithUserAnswers[]) => {
+      // solve quiz and return results and user answer
+      const { data } = await useAsyncData('solveQuiz', () => $fetch<{ data: any }>(`/api/quiz/${id}/solve`, {
+        method: 'POST',
+        body: {
+          userAnswers
+        }
+      }))
+      console.log(data.value?.data)
+    }
+
+    const getResults = async (resultId: number) => {
+      // return quiz with correct results and user answers
+    }
+
 
     return {
       currentQuiz,
@@ -224,6 +255,11 @@ export const useQuizStore = defineStore('quiz', () => {
       deleteAnswer,
       updateAnswer,
       createAnswer,
+
+      quizToSolve,
+      getQuizToSolveByQuizId,
+      solveQuiz,
+      getResults,
     }
   }
 )

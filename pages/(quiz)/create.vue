@@ -3,8 +3,8 @@
 </script>
 
 <template>
-  <AtomsCard class="shadow-md w-2/3 p-4">
+  <LayoutsMainContainer>
     <AtomsSubHeading>Create your own quiz.</AtomsSubHeading>
-    <MoleculesFormQuiz class="mt-2" />
-  </AtomsCard>
+    <MoleculesFormQuizCreateQuiz class="mt-2" />
+  </LayoutsMainContainer>
 </template>
