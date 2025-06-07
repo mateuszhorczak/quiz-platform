@@ -24,3 +24,30 @@ export interface QuizNames {
     name: string;
     description: string;
 }
+
+export interface AnswerSolve {
+    id: number;
+    name: string;
+    questionId: number;
+    selected: boolean;
+}
+
+export interface QuestionSolve {
+    id: number;
+    name: string;
+    quizId: number;
+    answers: AnswerSolve[];
+}
+
+export interface QuizSolve {
+    id: number;
+    name: string;
+    description: string;
+    questions: QuestionSolve[];
+}
+
+export interface QuestionWithUserAnswers {
+    // TODO: add text answer
+    questionId: number;
+    selectedAnswers: number[];
+}

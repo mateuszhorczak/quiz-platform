@@ -9,8 +9,8 @@ const props = defineProps<Props>()
 </script>
 
 <template>
-  <AtomsCard class="shadow-md w-2/3 p-4">
+  <LayoutsMainContainer>
     <AtomsParagraph>{{ props.name }}</AtomsParagraph>
     <AtomsSmallParagraph>{{ props.description }}</AtomsSmallParagraph>
-  </AtomsCard>
+  </LayoutsMainContainer>
 </template>

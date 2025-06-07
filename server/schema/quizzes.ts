@@ -8,6 +8,6 @@ export const quizzes = sqliteTable("quizzes", {
     description: text("description"),
 })
 
-export const quizzesRelations = relations(questions, ({ many }) => ({
+export const quizzesRelations = relations(quizzes, ({ many }) => ({
     questions: many(questions),
 }));

@@ -13,9 +13,8 @@ watchEffect(() => {
 <template>
   <UAccordion v-if="convertedItems" :items="convertedItems">
     <template #body="{ item }">
-      <MoleculesQuestionField :question-id="item.id" :answers="item.answers" />
-      <MoleculesFormAnswer :question-id="item.id" class="ml-8" />
+      <MoleculesFieldsQuestionEdit :question-id="item.id" :answers="item.answers" />
+      <MoleculesFormQuizCreateAnswer :question-id="item.id" class="ml-8" />
     </template>
   </UAccordion>
-
 </template>

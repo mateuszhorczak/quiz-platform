@@ -6,7 +6,7 @@ const props = defineProps<{
   help: string
 }>()
 
-const model = defineModel('val', { type: String, default: '' })
+const model = defineModel('val', { default: '' })
 </script>
 
 <template>
