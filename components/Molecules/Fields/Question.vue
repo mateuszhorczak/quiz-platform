@@ -10,11 +10,11 @@ const model = defineModel<AnswerSolve[]>('answers', { default: [] })
     <AtomsParagraph class="text-lg">{{ props.name }}</AtomsParagraph>
     <AtomsAnswerSolve
         v-for="item in model"
-        :key="item.id"
         :id="item.id"
+        :key="item.id"
+        v-model:selected="item.selected"
         :name="item.name"
         :question-id="item.questionId"
-        v-model:selected="item.selected"
     />
   </div>
 </template>

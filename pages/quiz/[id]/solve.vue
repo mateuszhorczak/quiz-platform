@@ -15,6 +15,8 @@ const onSubmit = async () => {
   }))
 
   await quizStore.solveQuiz(quizId, userAnswers)
+  const router = useRouter()
+  await router.push(`/quiz/${quizId}/result`)
 }
 </script>
 
@@ -23,6 +25,6 @@ const onSubmit = async () => {
     <AtomsSubHeading>{{ quizStore.quizToSolve?.name || '' }}</AtomsSubHeading>
     <AtomsParagraph class="mt-2">{{ quizStore.quizToSolve?.description || '' }}</AtomsParagraph>
     <OrganismsQuizQuestionsSolve />
-    <AtomsButtonContained type="click" label="Send answers" icon="i-mdi-send" @click="onSubmit" />
+    <AtomsButtonContained type="button" label="Send answers" icon="i-mdi-send" @click="onSubmit" />
   </LayoutsMainContainer>
 </template>

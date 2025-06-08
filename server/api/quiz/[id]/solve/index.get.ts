@@ -26,7 +26,7 @@ export default defineEventHandler(async (event) => {
       .from(questions)
       .where(eq(questions.quizId, quizId))
       .orderBy(sql`RANDOM()`)
-      .limit(3);
+      .limit(5); // change number of questions
 
     // Get questions id
     const questionsIds = quizQuestions.map((q) => q.id);
@@ -43,7 +43,7 @@ export default defineEventHandler(async (event) => {
         .then((rows) =>
           rows.reduce((acc, row) => {
             if (!acc[row.questionId]) acc[row.questionId] = [];
-            // @ts-expect-error ........
+            // @ts-expect-error ..............
             acc[row.questionId].push(row);
             return acc;
           }, {} as Record<number, AnswerSolve[]>)
@@ -55,7 +55,7 @@ export default defineEventHandler(async (event) => {
       id: quiz[0].id,
       name: quiz[0].name!,
       description: quiz[0].description!,
-      // @ts-expect-error ........
+      // @ts-expect-error .................
       questions: quizQuestions.map((q) => ({
         id: q.id,
         name: q.name,
