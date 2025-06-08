@@ -40,6 +40,7 @@ export default defineEventHandler(async (event) => {
       })
         .from(answers)
         .where(inArray(answers.questionId, questionsIds))
+        .orderBy(sql`RANDOM()`)
         .then((rows) =>
           rows.reduce((acc, row) => {
             if (!acc[row.questionId]) acc[row.questionId] = [];
