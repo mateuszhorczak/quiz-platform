@@ -13,7 +13,7 @@ const routeToQuiz = async (id: number) => {
     <UIcon name="i-mdi-developer-board" class="w-8 h-8 ml-4" />
     <AtomsSubHeading class="ml-2">Available quizzes</AtomsSubHeading>
   </div>
-  <MoleculesQuiz
+  <MoleculesFieldsQuiz
       v-for="quiz in quizStore.allQuizzes"
       :id="quiz.id"
       :key="quiz.id"

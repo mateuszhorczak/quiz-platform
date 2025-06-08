@@ -4,8 +4,8 @@ const props = defineProps<{ label: string, icon: string }>()
 
 <template>
   <UButton
-:icon="props.icon"
-           :label="props.label"
-           variant="outline"
+      :icon="props.icon"
+      :label="props.label"
+      variant="outline"
   />
 </template>

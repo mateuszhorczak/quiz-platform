@@ -1,14 +1,14 @@
 import { db } from "~/server/database";
 import { quizzes, questions, answers } from "~/server/schema";
-import { eq, inArray } from "drizzle-orm";
-import type { Answer, Quiz } from "~/types";
+import { eq, inArray, sql } from "drizzle-orm";
+import type { AnswerSolve, Quiz } from "~/types";
 
 export default defineEventHandler(async (event) => {
   const id = getRouterParam(event, "id")
   const quizId = parseInt(id as string, 10)
 
   try {
-    // Get quiz
+    // Get quiz to solve
     const quiz = await db.select({
       id: quizzes.id,
       name: quizzes.name,
@@ -24,7 +24,9 @@ export default defineEventHandler(async (event) => {
       quizId: questions.quizId,
     })
       .from(questions)
-      .where(eq(questions.quizId, quizId));
+      .where(eq(questions.quizId, quizId))
+      .orderBy(sql`RANDOM()`)
+      .limit(5); // change number of questions
 
     // Get questions id
     const questionsIds = quizQuestions.map((q) => q.id);
@@ -35,7 +37,6 @@ export default defineEventHandler(async (event) => {
         id: answers.id,
         name: answers.name,
         questionId: answers.questionId,
-        isCorrect: answers.isCorrect,
       })
         .from(answers)
         .where(inArray(answers.questionId, questionsIds))
@@ -45,7 +46,7 @@ export default defineEventHandler(async (event) => {
             // @ts-expect-error ..............
             acc[row.questionId].push(row);
             return acc;
-          }, {} as Record<number, Answer[]>)
+          }, {} as Record<number, AnswerSolve[]>)
         )
       : {};
 
@@ -54,12 +55,17 @@ export default defineEventHandler(async (event) => {
       id: quiz[0].id,
       name: quiz[0].name!,
       description: quiz[0].description!,
-      // @ts-expect-error ...............
+      // @ts-expect-error .................
       questions: quizQuestions.map((q) => ({
         id: q.id,
         name: q.name,
         quizId: q.quizId,
-        answers: questionsAnswers[q.id] || [],
+        answers: questionsAnswers[q.id].map((a) => ({
+          id: a.id,
+          name: a.name,
+          questionId: a.questionId,
+          selected: false,
+        })) || []
       })),
     };
 

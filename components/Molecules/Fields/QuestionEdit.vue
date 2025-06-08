@@ -9,7 +9,7 @@ const quizStore = useQuizStore()
 </script>
 
 <template>
-  <AtomsAnswer
+  <AtomsAnswerCreate
       v-for="answer in props.answers"
       :id="answer.id"
       :key="answer.id"

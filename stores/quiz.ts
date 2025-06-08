@@ -1,10 +1,20 @@
-import type { Quiz, Question, Answer, QuizNames } from "~/types";
+import type {
+  Quiz,
+  Question,
+  Answer,
+  QuizNames,
+  QuizSolve,
+  QuestionWithUserAnswers,
+  Result
+} from "~/types";
 
 export const useQuizStore = defineStore('quiz', () => {
     const allQuizzes = ref<QuizNames[]>([])
     const currentQuiz = ref<Quiz>()
     const currentQuestion = ref<Question>()
     const currentAnswer = ref<Answer>()
+    const quizToSolve = ref<QuizSolve>()
+    const solvedQuiz = ref<Result>()
 
     const createQuiz = async (name: string, description: string) => {
       try {
@@ -148,9 +158,8 @@ export const useQuizStore = defineStore('quiz', () => {
           method: 'GET'
         })
 
-        if (data.value) {
-          currentAnswer.value = data.value.data
-        }
+        if (!data.value) return
+        currentAnswer.value = data.value.data
       }
       catch (error) {
         console.error(error)
@@ -203,6 +212,32 @@ export const useQuizStore = defineStore('quiz', () => {
       }
     }
 
+    const getQuizToSolveByQuizId = async (id: number) => {
+      try {
+        const { data } = await useFetch<{ data: QuizSolve }>(`/api/quiz/${ id }/solve`, {
+          method: 'GET'
+        })
+
+        if (!data.value) return
+        quizToSolve.value = data.value.data
+      }
+      catch (error) {
+        console.error(error)
+      }
+    }
+
+    const solveQuiz = async (id: number, userAnswers: QuestionWithUserAnswers[]) => {
+      // solve quiz and return results and user answer
+      const { data } = await useFetch<{ data: Result }>(`/api/quiz/${ id }/solve`, {
+        method: 'POST',
+        body: {
+          userAnswers
+        }
+      })
+      if (!data.value) return
+
+      solvedQuiz.value = data.value.data
+    }
 
     return {
       currentQuiz,
@@ -224,6 +259,11 @@ export const useQuizStore = defineStore('quiz', () => {
       deleteAnswer,
       updateAnswer,
       createAnswer,
+
+      quizToSolve,
+      solvedQuiz,
+      getQuizToSolveByQuizId,
+      solveQuiz,
     }
   }
 )
