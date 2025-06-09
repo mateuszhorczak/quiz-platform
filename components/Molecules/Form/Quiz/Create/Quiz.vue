@@ -16,11 +16,22 @@ const state = reactive({
   description: undefined
 })
 
-const createNewQuiz = async (event: FormSubmitEvent<Schema>) => {
-  await quizStore.createQuiz(event.data.name, event.data.description)
+const isLoading = ref(false)
 
-  const router = useRouter()
-  await router.push('/')
+const createNewQuiz = async (event: FormSubmitEvent<Schema>) => {
+  isLoading.value = true
+  try {
+    await quizStore.createQuiz(event.data.name, event.data.description)
+
+    const router = useRouter()
+    await router.push('/')
+  }
+  catch (error) {
+    console.error(error)
+  }
+  finally {
+    isLoading.value = false
+  }
 }
 </script>
 
@@ -42,6 +53,6 @@ const createNewQuiz = async (event: FormSubmitEvent<Schema>) => {
         help=""
         size="md"
     />
-    <AtomsButtonContained type="submit" label="Create quiz" icon="i-mdi-plus-circle" />
+    <AtomsButtonContained type="submit" label="Create quiz" icon="i-mdi-plus-circle" :loading="isLoading" />
   </UForm>
 </template>
