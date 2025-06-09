@@ -17,15 +17,32 @@ const state = reactive({
   name: undefined,
 })
 
+const isLoading = ref(false)
+
 const createNewAnswer = async (event: FormSubmitEvent<Schema>) => {
-  await quizStore.createAnswer(event.data.name, props.questionId, quizId)
-  state.name = undefined
+  isLoading.value = true
+  try {
+    await quizStore.createAnswer(event.data.name, props.questionId, quizId)
+    state.name = undefined
+  }
+  catch (error) {
+    console.error('Failed to create answer:', error)
+  }
+  finally {
+    isLoading.value = false
+  }
 }
 </script>
 
 <template>
   <UForm :schema="schema" :state="state" class="mx-auto space-y-4" @submit="createNewAnswer">
-    <AtomsInput v-model:val="state.name" icon="i-mdi-chat-question" placeholder="Add answer" label="Answer" help="" size="md" />
-    <AtomsButtonContained type="submit" label="Add new answer" icon="i-mdi-plus-circle" />
+    <AtomsInput v-model:val="state.name"
+                icon="i-mdi-chat-question"
+                placeholder="Add answer"
+                label="Answer"
+                help=""
+                size="md"
+    />
+    <AtomsButtonContained type="submit" label="Add new answer" icon="i-mdi-plus-circle" :loading="isLoading" />
   </UForm>
 </template>

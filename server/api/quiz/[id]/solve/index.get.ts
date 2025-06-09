@@ -44,10 +44,9 @@ export default defineEventHandler(async (event) => {
         .then((rows) =>
           rows.reduce((acc, row) => {
             if (!acc[row.questionId]) acc[row.questionId] = [];
-            // @ts-expect-error ..............
             acc[row.questionId].push(row);
             return acc;
-          }, {} as Record<number, AnswerSolve[]>)
+          }, {} as Record<number, typeof rows[0][]>)
         )
       : {};
 
@@ -61,12 +60,12 @@ export default defineEventHandler(async (event) => {
         id: q.id,
         name: q.name,
         quizId: q.quizId,
-        answers: questionsAnswers[q.id].map((a) => ({
+        answers: (questionsAnswers[q.id] || []).map((a) => ({
           id: a.id,
           name: a.name,
           questionId: a.questionId,
           selected: false,
-        })) || []
+        }))
       })),
     };
 
