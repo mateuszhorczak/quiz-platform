@@ -14,6 +14,11 @@ const items = ref<NavigationMenuItem[][]>([
       to: '/my'
     },
     {
+      label: "Settings",
+      icon: 'i-mdi-cog',
+      to: '/settings'
+    },
+    {
       label: 'Home page',
       icon: 'i-mdi-home',
       to: '/',

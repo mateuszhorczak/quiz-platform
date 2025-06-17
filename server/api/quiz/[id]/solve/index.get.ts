@@ -6,6 +6,9 @@ import type { AnswerSolve, Quiz } from "~/types";
 export default defineEventHandler(async (event) => {
   const id = getRouterParam(event, "id")
   const quizId = parseInt(id as string, 10)
+  const query = getQuery(event)
+
+  const allQuestions = query.allQuestionInQuiz === 'true'
 
   try {
     // Get quiz to solve
@@ -18,15 +21,21 @@ export default defineEventHandler(async (event) => {
       .where(eq(quizzes.id, quizId));
 
     // Get quiz questions
-    const quizQuestions = await db.select({
+    let questionsQuery = db.select({
       id: questions.id,
       name: questions.name,
       quizId: questions.quizId,
     })
       .from(questions)
       .where(eq(questions.quizId, quizId))
-      .orderBy(sql`RANDOM()`)
-      .limit(5); // change number of questions
+      .orderBy(sql`RANDOM()`);
+
+    if (!allQuestions) {
+      // @ts-expect-error ..........
+      questionsQuery = questionsQuery.limit(5);
+    }
+
+    const quizQuestions = await questionsQuery;
 
     // Get questions id
     const questionsIds = quizQuestions.map((q) => q.id);
