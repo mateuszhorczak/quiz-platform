@@ -18,11 +18,11 @@ const quizId = parseInt(route.params.id as string, 10)
     <AtomsParagraph class="mt-2">{{ quizStore.solvedQuiz?.quiz?.description || '' }}</AtomsParagraph>
     <OrganismsQuizQuestionsResults />
     <AtomsButtonOutlined
-label="Solve again"
-                         icon="i-mdi-arrow-right"
-                         size="md"
-                         type="button"
-                         @click="$router.push(`/quiz/${quizId}/solve`)"
+        label="Solve again"
+        icon="i-mdi-arrow-right"
+        size="md"
+        type="button"
+        @click="$router.push(`/quiz/${quizId}/solve`)"
     />
   </LayoutsMainContainer>
 </template>

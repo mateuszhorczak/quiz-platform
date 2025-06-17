@@ -16,6 +16,8 @@ export const useQuizStore = defineStore('quiz', () => {
     const quizToSolve = ref<QuizSolve>()
     const solvedQuiz = ref<Result>()
 
+    const allQuestionInQuiz = ref<boolean>(false)
+
     const createQuiz = async (name: string, description: string) => {
       try {
         await $fetch('/api/quiz', {
@@ -215,7 +217,8 @@ export const useQuizStore = defineStore('quiz', () => {
     const getQuizToSolveByQuizId = async (id: number) => {
       try {
         const { data } = await useFetch<{ data: QuizSolve }>(`/api/quiz/${ id }/solve`, {
-          method: 'GET'
+          method: 'GET',
+          query: { allQuestionInQuiz }
         })
 
         if (!data.value) return
@@ -264,6 +267,8 @@ export const useQuizStore = defineStore('quiz', () => {
       solvedQuiz,
       getQuizToSolveByQuizId,
       solveQuiz,
+
+      allQuestionInQuiz,
     }
   }
 )
