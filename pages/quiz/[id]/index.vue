@@ -4,6 +4,10 @@ const quizStore = useQuizStore()
 
 const quizId = parseInt(route.params.id as string, 10)
 await quizStore.getQuizById(quizId)
+
+definePageMeta({
+  middleware: 'blocked'
+})
 </script>
 
 <template>
