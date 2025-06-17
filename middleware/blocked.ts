@@ -1,4 +1,6 @@
-export default defineNuxtRouteMiddleware((to, from) => {
-  if (/^\/quiz\/\d+$/.test(to.path)) {
-    return navigateTo(`${to.path}/solve`)
-  }})
+export default defineNuxtRouteMiddleware((to) => {
+  const match = to.path.match(/^\/quiz\/(\d+)\/?$/)
+  if (match) {
+    return navigateTo(`/quiz/${match[1]}/solve`)
+  }
+})
