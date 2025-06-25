@@ -3,22 +3,23 @@ import { questions, answers } from '~/server/schema';
 import { eq } from "drizzle-orm";
 
 export default defineEventHandler(async (event) => {
-    const id = getRouterParam(event, "id")
-    const questionId = parseInt(id as string, 10)
+  const id = getRouterParam(event, "id")
+  const questionId = parseInt(id as string, 10)
 
-    try {
-        // Delete question
+  try {
+    // Delete question
 
-        // delete answers linked to this question
-        await db.delete(answers)
-            .where(eq(answers.questionId, questionId));
+    // delete answers linked to this question
+    await db.delete(answers)
+      .where(eq(answers.questionId, questionId));
 
-        // delete question
-        await db.delete(questions)
-            .where(eq(questions.id, questionId));
+    // delete question
+    await db.delete(questions)
+      .where(eq(questions.id, questionId));
 
-    } catch (error) {
-        console.error("Error processing request:", error);
-        throw createError({ statusCode: 500, statusMessage: "Internal Server Error" });
-    }
+  }
+  catch (error) {
+    console.error("Error processing request:", error);
+    throw createError({ statusCode: 500, statusMessage: "Internal Server Error" });
+  }
 });

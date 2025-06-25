@@ -3,6 +3,11 @@
 </script>
 
 <template>
-  <!--  TODO-->
-<p>register</p>
+  <MoleculesMainHeading
+    text="Create new user account"
+    icon="i-mdi-account-box-plus-outline"
+  />
+  <LayoutsAuthContainer>
+    <MoleculesFormAuthRegister />
+  </LayoutsAuthContainer>
 </template>

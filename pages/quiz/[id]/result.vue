@@ -22,7 +22,7 @@ const quizId = parseInt(route.params.id as string, 10)
         icon="i-mdi-arrow-right"
         size="md"
         type="button"
-        @click="$router.push(`/quiz/${quizId}/solve`)"
+        @click="$router.push(`/quiz/${quizId}`)"
     />
   </LayoutsMainContainer>
 </template>

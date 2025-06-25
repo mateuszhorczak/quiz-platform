@@ -4,9 +4,10 @@ const props = defineProps<{ label: string, route: string }>()
 
 <template>
   <UButton
-:label="props.label"
-           variant="link"
-           :to="props.route"
-           size="xl"
+      :label="props.label"
+      variant="link"
+      :to="props.route"
+      size="xl"
+      class="cursor-pointer"
   />
 </template>

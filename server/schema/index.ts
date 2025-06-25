@@ -2,3 +2,4 @@
 export { questions } from "./questions"
 export { answers } from "./answers"
 export { quizzes } from "./quizzes"
+export { users } from "./users"
