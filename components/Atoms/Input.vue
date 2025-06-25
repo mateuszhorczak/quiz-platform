@@ -19,6 +19,7 @@ const model = defineModel<string>('val', { default: '' })
         :icon="props.icon"
         :placeholder="props.placeholder"
         variant="subtle"
+        class="w-full"
     />
   </UFormField>
 </template>

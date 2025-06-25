@@ -1,11 +1,19 @@
 <script setup lang="ts">
 const quizStore = useQuizStore()
-
 </script>
 
 <template>
+  <MoleculesMainHeading
+      text="Settings"
+      icon="i-mdi-cog-outline"
+  />
   <LayoutsMainContainer>
-    <AtomsSubHeading>Set if you want solve all question or 5 random by default</AtomsSubHeading>
-    <USwitch v-model="quizStore.allQuestionInQuiz" name="all-questions" label="Get all question instead 5 random" class="p-2" />
+    <AtomsSubHeading>Choose between solving all questions or 5 random questions by default</AtomsSubHeading>
+    <USwitch
+        v-model="quizStore.allQuestionInQuiz"
+        name="all-questions"
+        label="Solve all questions instead of 5 random ones"
+        class="p-2"
+    />
   </LayoutsMainContainer>
 </template>

@@ -34,12 +34,13 @@ const createNewQuestion = async (event: FormSubmitEvent<Schema>) => {
 
 <template>
   <UForm :schema="schema" :state="state" class="mx-auto space-y-4" @submit="createNewQuestion">
-    <AtomsInput v-model:val="state.name"
-                icon="i-mdi-chat-question"
-                placeholder="Ask a question"
-                label="Question name"
-                help=""
-                size="md"
+    <AtomsTextArea
+        v-model:val="state.name"
+        label="Question name"
+        name="name"
+        icon="i-mdi-chat-question"
+        placeholder="Ask a question"
+        help=""
     />
     <AtomsButtonContained type="submit" label="Add new question" icon="i-mdi-plus-circle" :loading="isLoading" />
   </UForm>

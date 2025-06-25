@@ -4,6 +4,6 @@
 
 <template>
   <p class="text-black dark:text-white text-base leading-6">
-    <slot/>
+    <slot />
   </p>
 </template>

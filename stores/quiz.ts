@@ -10,13 +10,14 @@ import type {
 
 export const useQuizStore = defineStore('quiz', () => {
     const allQuizzes = ref<QuizNames[]>([])
+    const userQuizzes = ref<QuizNames[]>([])
     const currentQuiz = ref<Quiz>()
     const currentQuestion = ref<Question>()
     const currentAnswer = ref<Answer>()
     const quizToSolve = ref<QuizSolve>()
     const solvedQuiz = ref<Result>()
 
-    const allQuestionInQuiz = ref<boolean>(false)
+    const allQuestionInQuiz = useCookie<boolean>("settings:allQuestionInQuiz", { default: () => false, watch: true })
 
     const createQuiz = async (name: string, description: string) => {
       try {
@@ -87,6 +88,21 @@ export const useQuizStore = defineStore('quiz', () => {
 
         if (data.value) {
           allQuizzes.value = data.value.data
+        }
+      }
+      catch (error) {
+        console.error(error)
+      }
+    }
+
+    const getUserQuizzes = async (userId: number) => {
+      try {
+        const { data } = await useFetch<{ data: QuizNames[] }>(`/api/quiz/user/${ userId }`, {
+          method: "GET",
+        })
+
+        if (data.value) {
+          userQuizzes.value = data.value.data
         }
       }
       catch (error) {
@@ -245,11 +261,13 @@ export const useQuizStore = defineStore('quiz', () => {
     return {
       currentQuiz,
       allQuizzes,
+      userQuizzes,
       createQuiz,
       updateQuiz,
       deleteQuiz,
       getQuizById,
       getAllQuizzes,
+      getUserQuizzes,
 
       currentQuestion,
       getQuestionById,

@@ -1,7 +1,7 @@
 import { db } from "~/server/database";
 import { quizzes, questions, answers } from "~/server/schema";
 import { eq, inArray, sql } from "drizzle-orm";
-import type { AnswerSolve, Quiz } from "~/types";
+import type { Quiz } from "~/types";
 
 export default defineEventHandler(async (event) => {
   const id = getRouterParam(event, "id")

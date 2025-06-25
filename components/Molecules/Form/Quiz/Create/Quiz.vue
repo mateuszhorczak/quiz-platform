@@ -39,19 +39,20 @@ const createNewQuiz = async (event: FormSubmitEvent<Schema>) => {
   <UForm :schema="schema" :state="state" class="mx-auto space-y-4" @submit="createNewQuiz">
     <AtomsInput
         v-model:val="state.name"
+        label="Quiz name"
+        name="name"
         icon="i-mdi-chat-question"
         placeholder="Name your quiz"
-        label="Quiz name"
         help=""
         size="md"
     />
-    <AtomsInput
+    <AtomsTextArea
         v-model:val="state.description"
+        label="Description"
+        name="description"
         icon="i-mdi-text-box"
         placeholder="Short describe"
-        label="Description"
         help=""
-        size="md"
     />
     <AtomsButtonContained type="submit" label="Create quiz" icon="i-mdi-plus-circle" :loading="isLoading" />
   </UForm>

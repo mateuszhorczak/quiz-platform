@@ -3,5 +3,10 @@ const props = defineProps<{ label: string, icon: string }>()
 </script>
 
 <template>
-  <UButton :label="props.label" variant="solid" :icon="props.icon" />
+  <UButton
+      :label="props.label"
+      variant="solid"
+      :icon="props.icon"
+      class="cursor-pointer"
+  />
 </template>

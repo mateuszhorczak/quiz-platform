@@ -3,6 +3,11 @@
 </script>
 
 <template>
-  <!--  TODO-->
-  <p>login</p>
+  <MoleculesMainHeading
+      text="Log in to your account"
+      icon="i-mdi-account-box-outline"
+  />
+  <LayoutsAuthContainer>
+    <MoleculesFormAuthLogin />
+  </LayoutsAuthContainer>
 </template>
