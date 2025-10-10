@@ -3,7 +3,6 @@ import type { User, NewUser, UserAuthentication } from '~/types'
 const emptyUser: User = {
   id: 0,
   username: "",
-  email: "",
   userQuizzesId: [],
 }
 

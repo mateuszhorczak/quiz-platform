@@ -1,8 +1,8 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "2a6c93bf-e6a8-4003-a82a-17dcaf4dd1cd",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "35ae0e1e-402c-46f3-9c5c-401eda5daa78",
+  "prevId": "2a6c93bf-e6a8-4003-a82a-17dcaf4dd1cd",
   "tables": {
     "answers": {
       "name": "answers",
@@ -136,13 +136,6 @@
           "notNull": true,
           "autoincrement": true
         },
-        "email": {
-          "name": "email",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
         "username": {
           "name": "username",
           "type": "text",
@@ -166,13 +159,6 @@
         }
       },
       "indexes": {
-        "users_email_unique": {
-          "name": "users_email_unique",
-          "columns": [
-            "email"
-          ],
-          "isUnique": true
-        },
         "users_username_unique": {
           "name": "users_username_unique",
           "columns": [
