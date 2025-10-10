@@ -4,7 +4,6 @@ import { quizzes } from './'
 
 export const users = sqliteTable('users', {
   id: integer('id').primaryKey({ autoIncrement: true }),
-  email: text('email').notNull().unique(),
   username: text('username').notNull().unique(),
   password: text('password').notNull(),
   dateCreation: text('date_creation').notNull(),

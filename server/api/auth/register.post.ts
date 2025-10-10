@@ -6,7 +6,7 @@ export default defineEventHandler(async (event) => {
   const body = await readBody(event)
 
   try {
-    if (!body.username || !body.password || !body.email) {
+    if (!body.username || !body.password) {
       throw createError({
         statusCode: 400,
         statusMessage: 'All fields are required!',
@@ -24,23 +24,11 @@ export default defineEventHandler(async (event) => {
       })
     }
 
-    const existingEmail = await db.query.users.findFirst({
-      where: (users, { eq }) => eq(users.email, body.email),
-    })
-
-    if (existingEmail) {
-      throw createError({
-        statusCode: 409,
-        statusMessage: 'The email address provided already has an account assigned.',
-      })
-    }
-
     const hashedPassword = await argon2.hash(body.password)
 
     const [newUser] = await db.insert(users).values({
       username: body.username,
       password: hashedPassword,
-      email: body.email,
       dateCreation: new Date().toISOString(),
     }).returning()
 

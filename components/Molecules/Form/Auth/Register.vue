@@ -11,7 +11,6 @@ const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()\-_=+{};:,
 
 const schema = z.object({
   username: z.string({ message: "Required" }).trim().min(3, 'Username must be at least 3 characters long'),
-  email: z.string({ message: "Required" }).trim().email('Incorrect email format').nonempty(),
   password: z.string({ message: "Required" }).trim().regex(passwordRegex, ''),
   password2: z.string({ message: "Required" }).trim(),
 }).refine(data => data.password === data.password2, {
@@ -25,7 +24,6 @@ const state = reactive<Partial<Schema>>({
   username: undefined,
   password: undefined,
   password2: undefined,
-  email: undefined,
 })
 
 async function onSubmit(event: FormSubmitEvent<Schema>) {
@@ -33,8 +31,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
   try {
     const { success, error } = await authStore.register({
       username: event.data.username,
-      password: event.data.password,
-      email: event.data.email
+      password: event.data.password
     })
 
     if (success) {
@@ -76,14 +73,6 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
       class="space-y-4"
       @submit="onSubmit"
   >
-    <AtomsInput
-        v-model:val="state.email"
-        label="Email"
-        name="email"
-        placeholder="you@example.com"
-        icon="i-mdi-email"
-        help=""
-    />
 
     <AtomsInput
         v-model:val="state.username"

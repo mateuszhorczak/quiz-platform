@@ -83,13 +83,11 @@ export interface Result {
 
 export interface User {
   id: number
-  email: string
   username: string
   userQuizzesId: number[]
 }
 
 export interface NewUser {
-  email: string
   username: string
   password: string
 }
