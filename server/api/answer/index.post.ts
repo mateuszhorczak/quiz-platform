@@ -3,6 +3,7 @@ import { answers } from '~/server/schema';
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);
+  await requireQuestionOwner(event, parseInt(body.questionId, 10));
 
   try {
     // Create answer

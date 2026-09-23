@@ -7,8 +7,9 @@ const emptyUser: User = {
 }
 
 export const useAuthStore = defineStore("auth", () => {
-  const token = useCookie<string | null>("auth:token", { default: () => null, watch: true })
-  const user = useCookie<User>("auth:user", { default: () => emptyUser, watch: true })
+  const cookieOptions = { sameSite: 'lax', secure: !import.meta.dev, maxAge: 60 * 60 * 24 } as const
+  const token = useCookie<string | null>("auth:token", { default: () => null, watch: true, ...cookieOptions })
+  const user = useCookie<User>("auth:user", { default: () => emptyUser, watch: true, ...cookieOptions })
 
   const login = async (userAuth: UserAuthentication) => {
     try {

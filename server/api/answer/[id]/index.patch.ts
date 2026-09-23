@@ -3,9 +3,9 @@ import { answers } from '~/server/schema';
 import { eq } from "drizzle-orm";
 
 export default defineEventHandler(async (event) => {
+  const answerId = parseId(event)
+  await requireAnswerOwner(event, answerId)
   const body = await readBody(event);
-  const id = getRouterParam(event, "id")
-  const answerId = parseInt(id as string, 10)
 
   try {
     // update answer

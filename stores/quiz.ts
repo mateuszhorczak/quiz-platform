@@ -21,13 +21,18 @@ export const useQuizStore = defineStore('quiz', () => {
 
     const createQuiz = async (name: string, description: string) => {
       try {
-        await $fetch('/api/quiz', {
+        const { data } = await $fetch<{ data: { id: number } }>('/api/quiz', {
           method: 'POST',
           body: {
             name,
             description
           },
         })
+
+        // keep the cookie copy in sync so the editor-rights middleware lets the author in
+        const auth = useAuthStore()
+        auth.user = { ...auth.user, userQuizzesId: [...auth.user.userQuizzesId, data.id] }
+
         await getAllQuizzes()
       }
       catch (error) {

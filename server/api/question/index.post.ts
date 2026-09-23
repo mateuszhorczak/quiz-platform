@@ -3,6 +3,7 @@ import { questions } from '~/server/schema';
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);
+  await requireQuizOwner(event, parseInt(body.quizId, 10));
 
   try {
     // Create question
