@@ -27,6 +27,12 @@ export default defineNuxtConfig({
       databaseUrl: '',
       authToken: '',
     },
+    public: {
+      // NUXT_PUBLIC_REGISTRATION_ENABLED=true opens sign-up to everyone
+      registrationEnabled: false,
+      // NUXT_PUBLIC_CONTACT_EMAIL - shown on /privacy; falls back to the GitHub link when empty
+      contactEmail: '',
+    },
   },
 
   devtools: { enabled: process.env.NODE_ENV === 'development' },

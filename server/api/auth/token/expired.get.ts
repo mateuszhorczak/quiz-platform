@@ -5,7 +5,7 @@ export default defineEventHandler(async (event) => {
 
   try {
     if (query.token) {
-      const isExpired = isTokenExpired(query.token as string)
+      const isExpired = isTokenExpired(event, query.token as string)
       return { data: isExpired }
     }
 

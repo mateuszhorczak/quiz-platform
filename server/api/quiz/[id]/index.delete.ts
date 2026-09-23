@@ -1,4 +1,5 @@
-export default defineEventHandler(async () => {
+export default defineEventHandler(async (event) => {
+  await requireQuizOwner(event, parseId(event))
 
   try {
     // Delete quiz // TODO: delete quiz

@@ -2,6 +2,7 @@
 import type { NavigationMenuItem } from '@nuxt/ui'
 
 const auth = useAuthStore()
+const { registrationEnabled } = useRuntimeConfig().public
 
 const items = computed<NavigationMenuItem[][]>(() => {
   const baseItems: NavigationMenuItem[] = [
@@ -43,11 +44,11 @@ const items = computed<NavigationMenuItem[][]>(() => {
           icon: 'i-mdi-login',
           to: '/login'
         },
-        {
+        ...(registrationEnabled ? [{
           label: 'Sign up',
           icon: 'i-mdi-register',
           to: '/register'
-        }
+        }] : [])
       ]
 
   return [

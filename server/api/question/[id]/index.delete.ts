@@ -3,8 +3,8 @@ import { questions, answers } from '~/server/schema';
 import { eq } from "drizzle-orm";
 
 export default defineEventHandler(async (event) => {
-  const id = getRouterParam(event, "id")
-  const questionId = parseInt(id as string, 10)
+  const questionId = parseId(event)
+  await requireQuestionOwner(event, questionId)
 
   try {
     // Delete question

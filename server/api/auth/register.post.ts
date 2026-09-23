@@ -3,6 +3,10 @@ import { users } from '~/server/schema'
 import argon2 from 'argon2'
 
 export default defineEventHandler(async (event) => {
+  if (!useRuntimeConfig(event).public.registrationEnabled) {
+    throw createError({ statusCode: 403, statusMessage: 'Registration is currently closed.' })
+  }
+
   const body = await readBody(event)
 
   try {
